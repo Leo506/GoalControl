@@ -30,5 +30,10 @@ namespace ToDoList
             model.AddTask("task1", 0);
             GoalList.ItemsSource = model.goals;
         }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
