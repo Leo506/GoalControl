@@ -31,8 +31,13 @@ namespace ToDoList
             GoalList.ItemsSource = model.goals;
         }
 
-        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        private void AddGoalClick(object sender, RoutedEventArgs e)
         {
+            var window = new AddGoalWindow();
+            window.NewGoalEvent += model.AddGoal;
+            var result = window.ShowDialog();
+            if (result != null && result.Value)
+                GoalList.ItemsSource = model.goals;
 
         }
     }

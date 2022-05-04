@@ -43,7 +43,7 @@
         </StackPanel>
 
         <TextBox Grid.Row="2" x:Name="InputField"/>
-        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100">Добавить цель</Button>
+        <Button Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="100" Click="AddGoalClick">Добавить цель</Button>
     
     </Grid>
 </Window>
