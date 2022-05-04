@@ -13,13 +13,21 @@ namespace ToDoList
         public string Description { get; private set; }
 
         public List<GoalTask> Tasks { get; private set; }
-        public float Progress { get; private set; }
+
+        private float _progress;
+        public string Progress
+        {
+            get
+            {
+                return $"{_progress * 100}%";
+            }
+        }
 
         public Goal(string description)
         {
             Description = description;
             Tasks = new List<GoalTask>();
-            Progress = 0;
+            _progress = 0;
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
@@ -38,8 +46,7 @@ namespace ToDoList
 
         private void RecountProgress(object? sender, PropertyChangedEventArgs e)
         {
-            Progress = Tasks.Where(x => x.IsDone).Count() / Tasks.Count();
-            Trace.WriteLine(Progress);
+            _progress = Tasks.Where(x => x.IsDone).Count() / Tasks.Count();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Progress)));
         }
 
