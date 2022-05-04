@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ToDoList"
         mc:Ignorable="d"
         Title="GoalControl" Height="450" Width="300">
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="8*"/>
@@ -19,13 +19,13 @@
             <ListView x:Name="GoalList">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ShowGridLines="True">
+                        <Grid ShowGridLines="False">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*"/>
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
                             <Expander Header="{Binding Path=Description}" Grid.Column="0">
-                                <StackPanel>
+                                <StackPanel Orientation="Horizontal">
                                     <ListView ItemsSource="{Binding Path=Tasks}" BorderBrush="White">
                                         <ListView.ItemTemplate>
                                             <DataTemplate>
@@ -33,6 +33,7 @@
                                             </DataTemplate>
                                         </ListView.ItemTemplate>
                                     </ListView>
+                                    <local:GoalExtension Content="Добавить задачу" Goal="{TemplateBinding Content}" Click="AddNewTask" Height="20"/>
                                 </StackPanel>
                             </Expander>
                             <TextBlock Text="{Binding Path=Progress, UpdateSourceTrigger=PropertyChanged}" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="50 0 0 0"/>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace ToDoList
     {
         public string Description { get; private set; }
 
-        public List<GoalTask> Tasks { get; private set; }
+        public ObservableCollection<GoalTask> Tasks { get; private set; }
 
         private float _progress;
         public string Progress
@@ -26,7 +27,7 @@ namespace ToDoList
         public Goal(string description)
         {
             Description = description;
-            Tasks = new List<GoalTask>();
+            Tasks = new ObservableCollection<GoalTask>();
             _progress = 0;
         }
 
@@ -46,7 +47,7 @@ namespace ToDoList
 
         private void RecountProgress(object? sender, PropertyChangedEventArgs e)
         {
-            _progress = Tasks.Where(x => x.IsDone).Count() / Tasks.Count();
+            _progress = (float)Tasks.Where(x => x.IsDone).Count() / Tasks.Count();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Progress)));
         }
 

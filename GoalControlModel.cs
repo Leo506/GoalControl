@@ -53,6 +53,11 @@ namespace ToDoList
             goals.RemoveAt(index);
         }
 
+        internal void AddTask(string text, Goal goal)
+        {
+            goal.AddTask(text);
+        }
+
 
         /// <summary>
         /// Добавляет новую задачу конкретной цели

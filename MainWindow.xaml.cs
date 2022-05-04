@@ -21,13 +21,12 @@ namespace ToDoList
     public partial class MainWindow : Window
     {
         GoalControlModel model;
+        string tmpString;
+
         public MainWindow()
         {
             InitializeComponent();
             model = new GoalControlModel();
-            model.AddGoal("Goal1");
-            model.AddGoal("Goal2");
-            model.AddTask("task1", 0);
             GoalList.ItemsSource = model.goals;
         }
 
@@ -35,10 +34,20 @@ namespace ToDoList
         {
             var window = new AddGoalWindow();
             window.NewGoalEvent += model.AddGoal;
+            window.ShowDialog();
+
+        }
+
+        private void AddNewTask(object sender, RoutedEventArgs e)
+        {
+            var window = new AddTaskWindow();
+            window.NewTaskEvent += (str) => tmpString = str;
             var result = window.ShowDialog();
             if (result != null && result.Value)
-                GoalList.ItemsSource = model.goals;
-
+            {
+                var goal = ((GoalExtension)sender).Goal;
+                model.AddTask(tmpString, goal);
+            }
         }
     }
 }
