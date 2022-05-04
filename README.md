@@ -9,3 +9,4 @@
 2. Открыть проект в Visual Studio 2022
 3. Собрать проект
 ## Скриншоты
+![screenimg](https://github.com/Leo506/GoalControl/blob/main/ResultImg/Result.png "Скриншот программы")
