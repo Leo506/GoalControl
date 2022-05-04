@@ -13,5 +13,26 @@
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Comic Sans MS" FontWeight="Bold" FontSize="20">Контроллер целей</TextBlock>
+
+        <StackPanel Grid.Row="1">
+            <ListView x:Name="GoalList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Expander Header="{Binding Path=Description}">
+                            <StackPanel>
+                                <ListView ItemsSource="{Binding Path=Tasks}" BorderBrush="White">
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <CheckBox Content="{TemplateBinding Content}"/>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </ListView>
+                            </StackPanel>
+                        </Expander>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+    
     </Grid>
 </Window>

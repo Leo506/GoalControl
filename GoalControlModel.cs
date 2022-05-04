@@ -8,7 +8,7 @@ namespace ToDoList
 {
     public class GoalControlModel
     {
-        private List<Goal> goals;
+        public List<Goal> goals { get; private set; }
 
         public GoalControlModel()
         {

@@ -8,9 +8,9 @@ namespace ToDoList
 {
     public class Goal
     {
-        public string Description { get; set; }
+        public string Description { get; private set; }
 
-        public List<string> Tasks { get; set; }
+        public List<string> Tasks { get; private set; }
 
         public Goal(string description)
         {

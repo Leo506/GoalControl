@@ -20,9 +20,15 @@ namespace ToDoList
     /// </summary>
     public partial class MainWindow : Window
     {
+        GoalControlModel model;
         public MainWindow()
         {
             InitializeComponent();
+            model = new GoalControlModel();
+            model.AddGoal("Goal1");
+            model.AddGoal("Goal2");
+            model.AddTask("task1", 0);
+            GoalList.ItemsSource = model.goals;
         }
     }
 }
