@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace ToDoList
 {
+    [System.Serializable]
     public class Goal : INotifyPropertyChanged
     {
         public string Description { get; private set; }

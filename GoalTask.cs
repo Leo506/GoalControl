@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace ToDoList
 {
+    [System.Serializable]
     public class GoalTask : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler? PropertyChanged;

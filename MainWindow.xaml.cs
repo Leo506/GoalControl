@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,8 +27,14 @@ namespace ToDoList
         public MainWindow()
         {
             InitializeComponent();
+            Closing += OnClose;
             model = new GoalControlModel();
             GoalList.ItemsSource = model.goals;
+        }
+
+        private void OnClose(object? sender, CancelEventArgs e)
+        {
+            model.Save();
         }
 
         private void AddGoalClick(object sender, RoutedEventArgs e)

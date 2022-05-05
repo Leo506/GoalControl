@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,11 @@ namespace ToDoList
 
         public GoalControlModel()
         {
-            goals = new ObservableCollection<Goal>();
+            var g = SaveLoad.Load();
+            if (g != null)
+                goals = g;
+            else
+                goals = new ObservableCollection<Goal>();
         }
 
 
@@ -24,6 +29,12 @@ namespace ToDoList
         public void AddGoal(string description)
         {
             goals.Add(new Goal(description));
+        }
+
+        public void Save()
+        {
+            SaveLoad.Save(goals);
+            Trace.WriteLine("Saving...");
         }
 
 
@@ -78,6 +89,13 @@ namespace ToDoList
         public void RemoveTask(int taskIndex, int goalIndex)
         {
             goals[goalIndex].RemoveTask(taskIndex);
+        }
+
+
+        ~GoalControlModel()
+        {
+            SaveLoad.Save(goals);
+            Trace.WriteLine("Saving...");
         }
     }
 }
