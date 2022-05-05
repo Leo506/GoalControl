@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace ToDoList
 {
-    [System.Serializable]
     public class Goal : INotifyPropertyChanged
     {
         public string Description { get; private set; }
@@ -32,6 +31,7 @@ namespace ToDoList
             _progress = 0;
         }
 
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
 
@@ -44,6 +44,14 @@ namespace ToDoList
             var task = new GoalTask(text);
             task.PropertyChanged += RecountProgress;
             Tasks.Add(task);
+            RecountProgress(null, new PropertyChangedEventArgs(""));
+        }
+
+        public void AddTask(GoalTask task)
+        {
+            task.PropertyChanged += RecountProgress;
+            Tasks.Add(task);
+            RecountProgress(null, new PropertyChangedEventArgs(""));
         }
 
         private void RecountProgress(object? sender, PropertyChangedEventArgs e)

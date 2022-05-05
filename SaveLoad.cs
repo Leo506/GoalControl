@@ -12,7 +12,7 @@ namespace ToDoList
 {
     public class SaveLoad
     {
-        public static void Save(ObservableCollection<Goal> goals)
+        public static void Save(List<SaveGoal> goals)
         {
             string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "control.data");
             Trace.WriteLine(path);
@@ -24,22 +24,22 @@ namespace ToDoList
             }
         }
 
-        public static ObservableCollection<Goal>? Load()
+        public static List<SaveGoal>? Load()
         {
-            string path = Path.Combine("C:\\Users\\790ma\\Documents", "GoalControl\\control.data");
+            string path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "control.data");
 
             if (!File.Exists(path))
                 return null;
 
-            ObservableCollection<Goal>? goals;
+            List<SaveGoal> save;
 
             using(FileStream fs = File.OpenRead(path))
             {
                 BinaryFormatter formatter = new BinaryFormatter();
-                goals = formatter.Deserialize(fs) as ObservableCollection<Goal>;
+                save = formatter.Deserialize(fs) as List<SaveGoal>;
             }
 
-            return goals;
+            return save;
         }
     }
 }

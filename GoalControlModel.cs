@@ -15,10 +15,21 @@ namespace ToDoList
         public GoalControlModel()
         {
             var g = SaveLoad.Load();
+            goals = new ObservableCollection<Goal>();
             if (g != null)
-                goals = g;
-            else
-                goals = new ObservableCollection<Goal>();
+            {
+                foreach (var item in g)
+                {
+                    var goal = new Goal(item.Description);
+                    foreach (var task in item.Tasks)
+                    {
+                        GoalTask t = new GoalTask(task.Text);
+                        t.IsDone = task.IsDone;
+                        goal.AddTask(t);
+                    }
+                    goals.Add(goal);
+                }
+            }   
         }
 
 
@@ -33,7 +44,18 @@ namespace ToDoList
 
         public void Save()
         {
-            SaveLoad.Save(goals);
+            List<SaveGoal> saveGoals = new List<SaveGoal>();
+            foreach (var item in goals)
+            {
+                List<SaveTask> tasks = new List<SaveTask>();
+                foreach (var task in item.Tasks)
+                {
+                    tasks.Add(new SaveTask(task.Text, task.IsDone));
+                }
+
+                saveGoals.Add(new SaveGoal(item.Description, tasks));
+            }
+            SaveLoad.Save(saveGoals);
             Trace.WriteLine("Saving...");
         }
 
@@ -92,10 +114,6 @@ namespace ToDoList
         }
 
 
-        ~GoalControlModel()
-        {
-            SaveLoad.Save(goals);
-            Trace.WriteLine("Saving...");
-        }
+       
     }
 }
